@@ -110,8 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				B26DB8B02A2148F700B96F21 /* Core */,
-				B26DB8B12A21490200B96F21 /* Views */,
+				B26DB8B12A21490200B96F21 /* Scenes */,
 				B26DB8C02A214CC500B96F21 /* Models */,
+				B26DB8D02A21A2BA00B96F21 /* Services */,
 				B26DB8BF2A214C6900B96F21 /* Resources */,
 			);
 			path = CleanSwift;
@@ -145,12 +146,12 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		B26DB8B12A21490200B96F21 /* Views */ = {
+		B26DB8B12A21490200B96F21 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				B26DB8B22A21490900B96F21 /* Home */,
 			);
-			path = Views;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		B26DB8B22A21490900B96F21 /* Home */ = {
@@ -180,6 +181,21 @@
 				B26DB8C12A214CD900B96F21 /* HTTPStatusCode.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B26DB8D02A21A2BA00B96F21 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B26DB8D12A21A35E00B96F21 /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B26DB8D12A21A35E00B96F21 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -15,13 +15,34 @@ import UIKit
 enum Home {
     
     // MARK: Use cases
-    enum Something {
+    enum Fetch {
         struct Request {
             
         }
+        
+        struct Response {
+            var httpStatusCodes: [HTTPStatusCode]
+        }
+        
+        struct ViewModel {
+            struct DiplayedHttp {
+                var responseType: String
+                var statusCodes: [HTTPStatusCode]
+            }
+            
+            var displayedHttps: [DiplayedHttp]
+        }
+    }
+    
+    enum SelectHttp {
+        struct Request {
+            var httpStatusCode: HTTPStatusCode
+        }
+        
         struct Response {
             
         }
+        
         struct ViewModel {
             
         }

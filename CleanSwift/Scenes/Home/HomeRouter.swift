@@ -13,7 +13,7 @@
 import UIKit
 
 @objc protocol HomeRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToHttp()
 }
 
 protocol HomeDataPassing {
@@ -26,6 +26,8 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     var dataStore: HomeDataStore?
     
     // MARK: Routing
+    func routeToHttp() {
+    }
     
 //    func routeToSomewhere(segue: UIStoryboardSegue?)
 //    {
