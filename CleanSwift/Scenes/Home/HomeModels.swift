@@ -14,37 +14,18 @@ import UIKit
 
 enum Home {
     
-    // MARK: Use cases
-    enum Fetch {
-        struct Request {
-            
-        }
-        
-        struct Response {
-            var httpStatusCodes: [HTTPStatusCode]
-        }
-        
-        struct ViewModel {
-            struct DiplayedHttp {
-                var responseType: String
-                var statusCodes: [HTTPStatusCode]
-            }
-            
-            var displayedHttps: [DiplayedHttp]
-        }
+    enum Request {
+        case fetchHttpItems
+        case selectHttp(item: HTTPStatusCode)
     }
     
-    enum SelectHttp {
-        struct Request {
-            var httpStatusCode: HTTPStatusCode
-        }
-        
-        struct Response {
-            
-        }
-        
-        struct ViewModel {
-            
-        }
+    enum Response {
+        case dataHttpItems(items: [HTTPStatusCode])
+        case selectHttp(item: HTTPStatusCode)
+    }
+    
+    enum ViewModel {
+        case httpItems(items: [HTTPItemProtocol])
+        case selectHttp(item: HTTPStatusCode)
     }
 }

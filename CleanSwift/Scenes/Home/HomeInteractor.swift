@@ -13,8 +13,7 @@
 import UIKit
 
 protocol HomeBusinessLogic {
-    func fetchHttps(request: Home.Fetch.Request)
-    func didSelectHttp(request: Home.SelectHttp.Request)
+    func doRequest(request: Home.Request)
 }
 
 protocol HomeDataStore {
@@ -28,23 +27,48 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     var selectedStatusCode: HTTPStatusCode?
     
     var presenter: HomePresentationLogic?
+    var worker: HomeWorkerLogic?
     
-    // MARK: Do something
-    func fetchHttps(request: Home.Fetch.Request) {
-        let response = Home.Fetch.Response(
-            httpStatusCodes: HTTPStatusCode.allCases
-        )
-        
-        statusCodes = response.httpStatusCodes
-        
-        presenter?.presentSomething(response: response)
+    init(worker: HomeWorkerLogic = HomeWorker()) {
+        self.worker = worker
     }
     
-    func didSelectHttp(request: Home.SelectHttp.Request) {
-        let response = Home.SelectHttp.Response()
+    // MARK: Do something
+    func doRequest(request: Home.Request) {
+        switch request {
+        case .fetchHttpItems:
+            
+            worker?.fetchHttpItems { result in
+                switch result {
+                case .success(let items):
+                    self.presentHttpItems(items)
+                case .failure:
+                    break
+                }
+            }
+            
+        case .selectHttp(let item):
+            presentHttpItem(item)
+        }
+    }
+}
+
+// MARK: - Private functions
+extension HomeInteractor {
+    
+    private func presentHttpItems(_ items: [HTTPStatusCode]) {
+        let response = Home.Response.dataHttpItems(items: items)
         
-        selectedStatusCode = request.httpStatusCode
+        statusCodes = items
         
-        presenter?.presentSelectCode(response: response)
+        presenter?.presentResponse(response: response)
+    }
+    
+    private func presentHttpItem(_ item: HTTPStatusCode) {
+        let response = Home.Response.selectHttp(item: item)
+        
+        selectedStatusCode = item
+        
+        presenter?.presentResponse(response: response)
     }
 }

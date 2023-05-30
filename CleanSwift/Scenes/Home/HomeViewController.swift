@@ -13,13 +13,12 @@
 import UIKit
 
 protocol HomeDisplayLogic: AnyObject {
-    func displaySomething(viewModel: Home.Fetch.ViewModel)
-    func displaySelectHttp(viewModel: Home.SelectHttp.ViewModel)
+    func displayViewModel(viewModel: Home.ViewModel)
 }
 
 class HomeViewController: UITableViewController {
     
-    private var displayedHttps: [Home.Fetch.ViewModel.DiplayedHttp] = []
+    private var httpItems: [HTTPItemProtocol] = []
     
     var interactor: HomeBusinessLogic?
     var router: (HomeRoutingLogic & HomeDataPassing)?
@@ -65,22 +64,23 @@ class HomeViewController: UITableViewController {
     
     // MARK: Fetch HTTPS
     func fetchHttps() {
-        let request = Home.Fetch.Request()
-        interactor?.fetchHttps(request: request)
+        let request = Home.Request.fetchHttpItems
+        interactor?.doRequest(request: request)
     }
 }
 
 // MARK: - HomeDisplayLogic
 extension HomeViewController: HomeDisplayLogic {
     
-    func displaySomething(viewModel: Home.Fetch.ViewModel) {
-        displayedHttps = viewModel.displayedHttps
-        
-        tableView.reloadData()
-    }
-    
-    func displaySelectHttp(viewModel: Home.SelectHttp.ViewModel) {
-        router?.routeToHttp()
+    func displayViewModel(viewModel: Home.ViewModel) {
+        switch viewModel {
+        case .httpItems(let items):
+            httpItems = items
+            
+            tableView.reloadData()
+        case .selectHttp(let item):
+            router?.routeToHttp(item: item)
+        }
     }
 }
 
@@ -88,11 +88,12 @@ extension HomeViewController: HomeDisplayLogic {
 extension HomeViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let displayedHttp = displayedHttps[indexPath.section]
-        let statusCode = displayedHttp.statusCodes[indexPath.row]
-        let request = Home.SelectHttp.Request(httpStatusCode: statusCode)
+        let httpItem = httpItems[indexPath.section]
+        let statusCode = httpItem.statusCodes[indexPath.row]
         
-        interactor?.didSelectHttp(request: request)
+        let request = Home.Request.selectHttp(item: statusCode)
+        
+        interactor?.doRequest(request: request)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -102,19 +103,25 @@ extension HomeViewController {
 extension HomeViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return displayedHttps.count
+        return httpItems.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let displayedHttp = displayedHttps[section]
+        let httpItem = httpItems[section]
         
-        return displayedHttp.statusCodes.count
+        return httpItem.statusCodes.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let httpItem = httpItems[section]
+        
+        return httpItem.responseType
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let displayedHttps = displayedHttps[indexPath.section]
-        let statusCode = displayedHttps.statusCodes[indexPath.row]
+        let httpItem = httpItems[indexPath.section]
+        let statusCode = httpItem.statusCodes[indexPath.row]
         
         cell.textLabel?.text = "\(statusCode.rawValue)"
         

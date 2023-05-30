@@ -12,9 +12,17 @@
 
 import UIKit
 
-class HomeWorker {
+protocol HomeWorkerLogic {
+    typealias completionFetchHttpItems = (Result<[HTTPStatusCode], Error>) -> ()
     
-    func doSomeWork() {
+    func fetchHttpItems(completion: @escaping completionFetchHttpItems)
+}
+
+class HomeWorker: HomeWorkerLogic {
+    
+    func fetchHttpItems(completion: @escaping completionFetchHttpItems) {
+        let httpItems = HTTPStatusCode.allCases
         
+        completion(.success(httpItems))
     }
 }

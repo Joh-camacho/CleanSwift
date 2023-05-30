@@ -12,21 +12,22 @@
 
 import UIKit
 
-@objc protocol HomeRoutingLogic {
-    func routeToHttp()
+protocol HomeRoutingLogic {
+    func routeToHttp(item: HTTPStatusCode)
 }
 
 protocol HomeDataPassing {
     var dataStore: HomeDataStore? { get }
 }
 
-class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
+class HomeRouter: HomeRoutingLogic, HomeDataPassing {
     
     weak var viewController: HomeViewController?
     var dataStore: HomeDataStore?
     
     // MARK: Routing
-    func routeToHttp() {
+    func routeToHttp(item: HTTPStatusCode) {
+        
     }
     
 //    func routeToSomewhere(segue: UIStoryboardSegue?)

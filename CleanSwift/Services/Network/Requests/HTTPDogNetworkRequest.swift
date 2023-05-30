@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HttpDogNetworkRequest: NetworkRequest {
+enum HTTPDogNetworkRequest: NetworkRequest {
     
     case httpDog(statusCode: Int)
     

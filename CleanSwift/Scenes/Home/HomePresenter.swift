@@ -13,39 +13,51 @@
 import UIKit
 
 protocol HomePresentationLogic {
-    func presentSomething(response: Home.Fetch.Response)
-    func presentSelectCode(response: Home.SelectHttp.Response)
+    func presentResponse(response: Home.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
     
     weak var viewController: HomeDisplayLogic?
     
-    // MARK: Do something
-    func presentSomething(response: Home.Fetch.Response) {
-        var displayedHttps: [Home.Fetch.ViewModel.DiplayedHttp] = []
+    // MARK: Present Responses
+    func presentResponse(response: Home.Response) {
+        switch response {
+        case .dataHttpItems(let items):
+            displayHttpItems(items)
+        case .selectHttp(let item):
+            displayHttpItem(item)
+        }
+    }
+}
+
+// MARK: - Private functions
+extension HomePresenter {
+    
+    private func displayHttpItems(_ items: [HTTPStatusCode]) {
+        var httpItems: [HTTPItemProtocol] = []
         
-        for statusCode in response.httpStatusCodes {
-            let responseType = getResponseType(statusCode.responseType)
+        for item in items {
+            let responseType = getResponseType(item.responseType)
             
-            if let index = displayedHttps.firstIndex(where: { $0.responseType == responseType }) {
-                displayedHttps[index].statusCodes.append(statusCode)
+            if let index = httpItems.firstIndex(where: { $0.responseType == responseType }) {
+                httpItems[index].statusCodes.append(item)
             } else {
-                let displayedHttp = Home.Fetch.ViewModel.DiplayedHttp(responseType: responseType, statusCodes: [statusCode])
+                let httpItem = HTTPItem(responseType: responseType, statusCodes: [item])
                 
-                displayedHttps.append(displayedHttp)
+                httpItems.append(httpItem)
             }
         }
         
-        let viewModel = Home.Fetch.ViewModel(displayedHttps: displayedHttps)
+        let viewModel = Home.ViewModel.httpItems(items: httpItems)
         
-        viewController?.displaySomething(viewModel: viewModel)
+        viewController?.displayViewModel(viewModel: viewModel)
     }
     
-    func presentSelectCode(response: Home.SelectHttp.Response) {
-        let viewModel = Home.SelectHttp.ViewModel()
+    private func displayHttpItem(_ item: HTTPStatusCode) {
+        let viewModel = Home.ViewModel.selectHttp(item: item)
         
-        viewController?.displaySelectHttp(viewModel: viewModel)
+        viewController?.displayViewModel(viewModel: viewModel)
     }
     
     private func getResponseType(_ responseType: HTTPStatusCode.ResponseType) -> String {
