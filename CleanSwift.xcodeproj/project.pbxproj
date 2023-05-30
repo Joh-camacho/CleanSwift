@@ -21,6 +21,11 @@
 		B26DB8BD2A214C6200B96F21 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8B72A214C6200B96F21 /* HomeViewController.swift */; };
 		B26DB8BE2A214C6200B96F21 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8B82A214C6200B96F21 /* HomeInteractor.swift */; };
 		B26DB8C22A214CD900B96F21 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8C12A214CD900B96F21 /* HTTPStatusCode.swift */; };
+		B2C4379F2A262FB600F18E33 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C4379E2A262FB600F18E33 /* NetworkService.swift */; };
+		B2C437A12A262FD300F18E33 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A02A262FD300F18E33 /* NetworkError.swift */; };
+		B2C437A32A262FEF00F18E33 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */; };
+		B2C437A52A2630B300F18E33 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A42A2630B300F18E33 /* NetworkRequest.swift */; };
+		B2C437A82A26336700F18E33 /* HttpDogNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A72A26336700F18E33 /* HttpDogNetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +64,11 @@
 		B26DB8B72A214C6200B96F21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B26DB8B82A214C6200B96F21 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		B26DB8C12A214CD900B96F21 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		B2C4379E2A262FB600F18E33 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B2C437A02A262FD300F18E33 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		B2C437A42A2630B300F18E33 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		B2C437A72A26336700F18E33 /* HttpDogNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpDogNetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +204,21 @@
 		B26DB8D12A21A35E00B96F21 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B2C437A62A26334F00F18E33 /* Requests */,
+				B2C4379E2A262FB600F18E33 /* NetworkService.swift */,
+				B2C437A42A2630B300F18E33 /* NetworkRequest.swift */,
+				B2C437A02A262FD300F18E33 /* NetworkError.swift */,
+				B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B2C437A62A26334F00F18E33 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				B2C437A72A26336700F18E33 /* HttpDogNetworkRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,14 +351,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2C437A52A2630B300F18E33 /* NetworkRequest.swift in Sources */,
+				B2C437A32A262FEF00F18E33 /* URLSessionProtocol.swift in Sources */,
+				B2C4379F2A262FB600F18E33 /* NetworkService.swift in Sources */,
 				B26DB8C22A214CD900B96F21 /* HTTPStatusCode.swift in Sources */,
 				B26DB8BB2A214C6200B96F21 /* HomeRouter.swift in Sources */,
 				B26DB8812A2148EE00B96F21 /* AppDelegate.swift in Sources */,
+				B2C437A82A26336700F18E33 /* HttpDogNetworkRequest.swift in Sources */,
 				B26DB8BD2A214C6200B96F21 /* HomeViewController.swift in Sources */,
 				B26DB8832A2148EE00B96F21 /* SceneDelegate.swift in Sources */,
 				B26DB8BA2A214C6200B96F21 /* HomeWorker.swift in Sources */,
 				B26DB8BE2A214C6200B96F21 /* HomeInteractor.swift in Sources */,
 				B26DB8B92A214C6200B96F21 /* HomePresenter.swift in Sources */,
+				B2C437A12A262FD300F18E33 /* NetworkError.swift in Sources */,
 				B26DB8BC2A214C6200B96F21 /* HomeModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
