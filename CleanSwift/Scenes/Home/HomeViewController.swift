@@ -54,12 +54,17 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "HTTP Status Codes"
         
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         
         fetchHttps()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     // MARK: Fetch HTTPS
