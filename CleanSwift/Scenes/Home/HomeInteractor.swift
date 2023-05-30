@@ -16,15 +16,7 @@ protocol HomeBusinessLogic {
     func doRequest(request: Home.Request)
 }
 
-protocol HomeDataStore {
-    var statusCodes: [HTTPStatusCode]? { get set }
-    var selectedStatusCode: HTTPStatusCode? { get set }
-}
-
-class HomeInteractor: HomeBusinessLogic, HomeDataStore {
-    
-    var statusCodes: [HTTPStatusCode]?
-    var selectedStatusCode: HTTPStatusCode?
+class HomeInteractor: HomeBusinessLogic {
     
     var presenter: HomePresentationLogic?
     var worker: HomeWorkerLogic?
@@ -59,15 +51,11 @@ extension HomeInteractor {
     private func presentHttpItems(_ items: [HTTPStatusCode]) {
         let response = Home.Response.dataHttpItems(items: items)
         
-        statusCodes = items
-        
         presenter?.presentResponse(response: response)
     }
     
     private func presentHttpItem(_ item: HTTPStatusCode) {
         let response = Home.Response.selectHttp(item: item)
-        
-        selectedStatusCode = item
         
         presenter?.presentResponse(response: response)
     }

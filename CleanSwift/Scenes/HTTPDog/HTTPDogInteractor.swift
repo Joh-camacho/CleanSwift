@@ -16,17 +16,10 @@ protocol HTTPDogBusinessLogic {
     func doRequest(request: HTTPDog.Request)
 }
 
-protocol HTTPDogDataStore {
-    
-    var httpStatusCode: HTTPStatusCode? { get set }
-    
-}
-
-class HTTPDogInteractor: HTTPDogDataStore {
+class HTTPDogInteractor {
     
     private let worker: HTTPDogWorkerLogic?
     
-    var httpStatusCode: HTTPStatusCode?
     var presenter: HTTPDogPresentationLogic?
     
     init(worker: HTTPDogWorkerLogic = HTTPDogWorker()) {
@@ -38,14 +31,17 @@ class HTTPDogInteractor: HTTPDogDataStore {
 extension HTTPDogInteractor: HTTPDogBusinessLogic {
     
     func doRequest(request: HTTPDog.Request) {
-        worker?.fetchHttpDogItem(statusCode: httpStatusCode?.rawValue ?? 404) { result in
-            switch result {
-            case .success(let httpDogItem):
-                let response = HTTPDog.Response.dataHttpDogItem(item: httpDogItem)
-                
-                self.presenter?.presentResponse(response: response)
-            case .failure(let error):
-                print("DEBUG:", error)
+        switch request {
+        case .fetchHttpDogItem(let item):
+            worker?.fetchHttpDogItem(statusCode: item.rawValue) { result in
+                switch result {
+                case .success(let httpDogItem):
+                    let response = HTTPDog.Response.dataHttpDogItem(item: httpDogItem)
+                    
+                    self.presenter?.presentResponse(response: response)
+                case .failure(let error):
+                    print("DEBUG:", error)
+                }
             }
         }
     }

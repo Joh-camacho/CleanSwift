@@ -19,12 +19,15 @@ protocol HTTPDogDisplayLogic: AnyObject {
 class HTTPDogViewController: UIViewController {
     
     private let mainView = HTTPDogView()
+    private let httpStatusCode: HTTPStatusCode
     
     var interactor: HTTPDogBusinessLogic?
-    var router: (HTTPDogRoutingLogic & HTTPDogDataPassing)?
+    var router: HTTPDogRoutingLogic?
     
     // MARK: Object lifecycle
-    init() {
+    init(httpStatusCode: HTTPStatusCode) {
+        self.httpStatusCode = httpStatusCode
+        
         super.init(nibName: nil, bundle: nil)
         
         setup()
@@ -47,7 +50,6 @@ class HTTPDogViewController: UIViewController {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        router.dataStore = interactor
     }
     
     // MARK: View lifecycle
@@ -55,6 +57,7 @@ class HTTPDogViewController: UIViewController {
         super.viewDidLoad()
         
         view = mainView
+        navigationItem.title = httpStatusCode.responseType.description
         
         fetchHttpDog()
     }
@@ -66,7 +69,7 @@ class HTTPDogViewController: UIViewController {
     }
     
     func fetchHttpDog() {
-        let request = HTTPDog.Request.fetchHttpDogItem
+        let request = HTTPDog.Request.fetchHttpDogItem(item: httpStatusCode)
         
         interactor?.doRequest(request: request)
         

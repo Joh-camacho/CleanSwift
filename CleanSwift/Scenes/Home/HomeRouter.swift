@@ -16,20 +16,13 @@ protocol HomeRoutingLogic {
     func routeToHttp(item: HTTPStatusCode)
 }
 
-protocol HomeDataPassing {
-    var dataStore: HomeDataStore? { get }
-}
-
-class HomeRouter: HomeRoutingLogic, HomeDataPassing {
+class HomeRouter: HomeRoutingLogic {
     
     weak var viewController: HomeViewController?
-    var dataStore: HomeDataStore?
     
     // MARK: Routing
     func routeToHttp(item: HTTPStatusCode) {
-        let httpViewController = HTTPDogViewController()
-        
-        httpViewController.router?.dataStore?.httpStatusCode = item
+        let httpViewController = HTTPDogViewController(httpStatusCode: item)
 
         viewController?.navigationController?.pushViewController(httpViewController, animated: true)
     }

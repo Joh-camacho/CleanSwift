@@ -21,7 +21,7 @@ class HomeViewController: UITableViewController {
     private var httpItems: [HTTPItemProtocol] = []
     
     var interactor: HomeBusinessLogic?
-    var router: (HomeRoutingLogic & HomeDataPassing)?
+    var router: HomeRoutingLogic?
     
     // MARK: Object lifecycle
     init() {
@@ -47,7 +47,6 @@ class HomeViewController: UITableViewController {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        router.dataStore = interactor
     }
     
     // MARK: View lifecycle

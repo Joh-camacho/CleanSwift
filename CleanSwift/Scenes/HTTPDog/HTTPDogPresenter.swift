@@ -29,8 +29,9 @@ extension HTTPDogPresenter: HTTPDogPresentationLogic {
         switch response {
         case .dataHttpDogItem(let item):
             let url = URL(string: item.urlImage.jpg)!
+            let urlRequest = URLRequest(url: url)
             
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            URLSession.shared.loadData(with: urlRequest) { data, response, error in
                 if let _ = error {
                     return
                 }
@@ -48,7 +49,7 @@ extension HTTPDogPresenter: HTTPDogPresentationLogic {
                     
                     self?.viewController?.displayViewModel(viewModel: viewModel)
                 }
-            }.resume()
+            }
         }
     }
 }

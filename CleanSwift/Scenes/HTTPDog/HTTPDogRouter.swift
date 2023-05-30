@@ -16,14 +16,9 @@ protocol HTTPDogRoutingLogic {
     func routeToSomewhere()
 }
 
-protocol HTTPDogDataPassing {
-    var dataStore: HTTPDogDataStore? { get set }
-}
-
-class HTTPDogRouter: HTTPDogDataPassing {
+class HTTPDogRouter {
     
     weak var viewController: HTTPDogViewController?
-    var dataStore: HTTPDogDataStore?
     
 }
 

@@ -32,6 +32,23 @@ enum HTTPStatusCode: Int, Error, CaseIterable {
         
         /// - undefined: The class of the status code cannot be resolved.
         case undefined
+        
+        var description: String {
+            switch self {
+            case .informational:
+                return "Informational"
+            case .success:
+                return "Success"
+            case .clientError:
+                return "Client Error"
+            case .redirection:
+                return "Redirection"
+            case .serverError:
+                return "Server Error"
+            case .undefined:
+                return "Undefined"
+            }
+        }
     }
     
     //

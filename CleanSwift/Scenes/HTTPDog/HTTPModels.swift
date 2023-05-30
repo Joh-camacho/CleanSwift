@@ -15,7 +15,7 @@ import UIKit
 enum HTTPDog {
     
     enum Request {
-        case fetchHttpDogItem
+        case fetchHttpDogItem(item: HTTPStatusCode)
     }
     
     enum Response {

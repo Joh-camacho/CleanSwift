@@ -38,7 +38,7 @@ extension HomePresenter {
         var httpItems: [HTTPItemProtocol] = []
         
         for item in items {
-            let responseType = getResponseType(item.responseType)
+            let responseType = item.responseType.description
             
             if let index = httpItems.firstIndex(where: { $0.responseType == responseType }) {
                 httpItems[index].statusCodes.append(item)
@@ -58,22 +58,5 @@ extension HomePresenter {
         let viewModel = Home.ViewModel.selectHttp(item: item)
         
         viewController?.displayViewModel(viewModel: viewModel)
-    }
-    
-    private func getResponseType(_ responseType: HTTPStatusCode.ResponseType) -> String {
-        switch responseType {
-        case .informational:
-            return "Informational"
-        case .success:
-            return "Success"
-        case .clientError:
-            return "Client Error"
-        case .redirection:
-            return "Redirection"
-        case .serverError:
-            return "Server Error"
-        case .undefined:
-            return "Undefined"
-        }
     }
 }
