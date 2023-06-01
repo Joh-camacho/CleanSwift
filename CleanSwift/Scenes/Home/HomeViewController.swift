@@ -82,6 +82,8 @@ extension HomeViewController: HomeDisplayLogic {
             httpItems = items
             
             tableView.reloadData()
+        case .errorFetchHttpItems(let message):
+            presentErrorMessage(message)
         case .selectHttp(let item):
             router?.routeToHttp(item: item)
         }

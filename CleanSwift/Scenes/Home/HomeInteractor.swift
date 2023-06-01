@@ -34,8 +34,8 @@ class HomeInteractor: HomeBusinessLogic {
                 switch result {
                 case .success(let items):
                     self.presentHttpItems(items)
-                case .failure:
-                    break
+                case .failure(let error):
+                    self.presentErrorFetchHttpItems(error)
                 }
             }
             
@@ -56,6 +56,12 @@ extension HomeInteractor {
     
     private func presentHttpItem(_ item: HTTPStatusCode) {
         let response = Home.Response.selectHttp(item: item)
+        
+        presenter?.presentResponse(response: response)
+    }
+    
+    private func presentErrorFetchHttpItems(_ error: Error) {
+        let response = Home.Response.errorFetchHttpItems(error: error)
         
         presenter?.presentResponse(response: response)
     }

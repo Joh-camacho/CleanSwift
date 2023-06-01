@@ -20,9 +20,11 @@ enum HTTPDog {
     
     enum Response {
         case dataHttpDogItem(item: HTTPDogItemProtocol)
+        case errorFetchHttpDogItem(error: Error)
     }
     
     enum ViewModel {
-        case httpDogItem(item: HTTPDogItemView)
+        case httpDogItem(item: HTTPDogItemProtocol)
+        case errorFetchHttpDogItem(message: String)
     }
 }

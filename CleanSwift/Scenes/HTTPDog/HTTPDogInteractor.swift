@@ -33,16 +33,32 @@ extension HTTPDogInteractor: HTTPDogBusinessLogic {
     func doRequest(request: HTTPDog.Request) {
         switch request {
         case .fetchHttpDogItem(let item):
+            
             worker?.fetchHttpDogItem(statusCode: item.rawValue) { result in
                 switch result {
                 case .success(let httpDogItem):
-                    let response = HTTPDog.Response.dataHttpDogItem(item: httpDogItem)
-                    
-                    self.presenter?.presentResponse(response: response)
+                    self.presentHttpDogItem(httpDogItem)
                 case .failure(let error):
-                    print("DEBUG:", error)
+                    self.presentErrorFetchHttpDogItem(error)
                 }
             }
+            
         }
+    }
+}
+
+// MARK: - Private functions
+extension HTTPDogInteractor {
+    
+    private func presentHttpDogItem(_ item: HTTPDogItemProtocol) {
+        let response = HTTPDog.Response.dataHttpDogItem(item: item)
+        
+        self.presenter?.presentResponse(response: response)
+    }
+    
+    private func presentErrorFetchHttpDogItem(_ error: Error) {
+        let response = HTTPDog.Response.errorFetchHttpDogItem(error: error)
+        
+        presenter?.presentResponse(response: response)
     }
 }

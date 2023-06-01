@@ -21,11 +21,15 @@ enum Home {
     
     enum Response {
         case dataHttpItems(items: [HTTPStatusCode])
+        case errorFetchHttpItems(error: Error)
+        
         case selectHttp(item: HTTPStatusCode)
     }
     
     enum ViewModel {
         case httpItems(items: [HTTPItemProtocol])
+        case errorFetchHttpItems(message: String)
+        
         case selectHttp(item: HTTPStatusCode)
     }
 }

@@ -25,6 +25,8 @@ class HomePresenter: HomePresentationLogic {
         switch response {
         case .dataHttpItems(let items):
             displayHttpItems(items)
+        case .errorFetchHttpItems(let error):
+            displayFetchError(error)
         case .selectHttp(let item):
             displayHttpItem(item)
         }
@@ -56,6 +58,12 @@ extension HomePresenter {
     
     private func displayHttpItem(_ item: HTTPStatusCode) {
         let viewModel = Home.ViewModel.selectHttp(item: item)
+        
+        viewController?.displayViewModel(viewModel: viewModel)
+    }
+    
+    private func displayFetchError(_ error: Error) {
+        let viewModel = Home.ViewModel.errorFetchHttpItems(message: error.localizedDescription)
         
         viewController?.displayViewModel(viewModel: viewModel)
     }

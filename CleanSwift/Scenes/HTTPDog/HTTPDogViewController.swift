@@ -81,12 +81,24 @@ class HTTPDogViewController: UIViewController {
 extension HTTPDogViewController: HTTPDogDisplayLogic {
     
     func displayViewModel(viewModel: HTTPDog.ViewModel) {
-        switch viewModel {
-        case .httpDogItem(let item):
-            let image = UIImage(data: item.dataImage)
-            
-            mainView.dogImageView.image = image
-            mainView.activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            switch viewModel {
+            case .httpDogItem(let item):
+                self.mainView.dogImageView.downloadedFrom(link: item.urlImage.jpg) { result in
+                    switch result {
+                    case .success:
+                        break
+                    case .failure(let error):
+                        self.presentErrorMessage(error.localizedDescription)
+                    }
+                    
+                    self.mainView.activityIndicator.stopAnimating()
+                }
+            case .errorFetchHttpDogItem(let message):
+                self.presentErrorMessage(message)
+                
+                self.mainView.activityIndicator.stopAnimating()
+            }
         }
     }
 }

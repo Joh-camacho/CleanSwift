@@ -28,28 +28,25 @@ extension HTTPDogPresenter: HTTPDogPresentationLogic {
     func presentResponse(response: HTTPDog.Response) {
         switch response {
         case .dataHttpDogItem(let item):
-            let url = URL(string: item.urlImage.jpg)!
-            let urlRequest = URLRequest(url: url)
-            
-            URLSession.shared.loadData(with: urlRequest) { data, response, error in
-                if let _ = error {
-                    return
-                }
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    return
-                }
-                guard let data = data else {
-                    return
-                }
-                
-                DispatchQueue.main.async { [weak self] in
-                    let item = HTTPDogItemView(dataImage: data)
-                    
-                    let viewModel = HTTPDog.ViewModel.httpDogItem(item: item)
-                    
-                    self?.viewController?.displayViewModel(viewModel: viewModel)
-                }
-            }
+            displayHttpDogItem(item)
+        case .errorFetchHttpDogItem(let error):
+            displayErrorFetchHttpDogItem(error)
         }
+    }
+}
+
+// MARK: - Private functions
+extension HTTPDogPresenter {
+    
+    private func displayHttpDogItem(_ item: HTTPDogItemProtocol) {
+        let viewModel = HTTPDog.ViewModel.httpDogItem(item: item)
+        
+        self.viewController?.displayViewModel(viewModel: viewModel)
+    }
+    
+    private func displayErrorFetchHttpDogItem(_ error: Error) {
+        let viewModel = HTTPDog.ViewModel.errorFetchHttpDogItem(message: error.localizedDescription)
+        
+        viewController?.displayViewModel(viewModel: viewModel)
     }
 }

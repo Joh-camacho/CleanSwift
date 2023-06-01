@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct HTTPDogItemView {
-    
-    let dataImage: Data
-    
-}
-
 class HTTPDogView: UIView {
     
     lazy var dogImageView: UIImageView = {

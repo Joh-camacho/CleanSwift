@@ -21,6 +21,8 @@
 		B26DB8BD2A214C6200B96F21 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8B72A214C6200B96F21 /* HomeViewController.swift */; };
 		B26DB8BE2A214C6200B96F21 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8B82A214C6200B96F21 /* HomeInteractor.swift */; };
 		B26DB8C22A214CD900B96F21 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26DB8C12A214CD900B96F21 /* HTTPStatusCode.swift */; };
+		B29A3B502A26E1CD004BE082 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29A3B4F2A26E1CD004BE082 /* UIViewController+Extension.swift */; };
+		B29A3B522A281579004BE082 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29A3B512A281579004BE082 /* UIImageView+Extension.swift */; };
 		B2C4379F2A262FB600F18E33 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C4379E2A262FB600F18E33 /* NetworkService.swift */; };
 		B2C437A12A262FD300F18E33 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A02A262FD300F18E33 /* NetworkError.swift */; };
 		B2C437A32A262FEF00F18E33 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */; };
@@ -72,6 +74,8 @@
 		B26DB8B72A214C6200B96F21 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B26DB8B82A214C6200B96F21 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		B26DB8C12A214CD900B96F21 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		B29A3B4F2A26E1CD004BE082 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		B29A3B512A281579004BE082 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		B2C4379E2A262FB600F18E33 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B2C437A02A262FD300F18E33 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				B26DB8C02A214CC500B96F21 /* Models */,
 				B26DB8D02A21A2BA00B96F21 /* Services */,
 				B26DB8BF2A214C6900B96F21 /* Resources */,
+				B29A3B4E2A26E18E004BE082 /* Extensions */,
 			);
 			path = CleanSwift;
 			sourceTree = "<group>";
@@ -229,6 +234,15 @@
 				B2C437A22A262FEF00F18E33 /* URLSessionProtocol.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		B29A3B4E2A26E18E004BE082 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B29A3B4F2A26E1CD004BE082 /* UIViewController+Extension.swift */,
+				B29A3B512A281579004BE082 /* UIImageView+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B2C437A62A26334F00F18E33 /* Requests */ = {
@@ -390,6 +404,7 @@
 				B2C437B52A263D2B00F18E33 /* HTTPModels.swift in Sources */,
 				B2C437AA2A263B3200F18E33 /* HTTPItem.swift in Sources */,
 				B2C437B92A264BB300F18E33 /* HTTPDogView.swift in Sources */,
+				B29A3B502A26E1CD004BE082 /* UIViewController+Extension.swift in Sources */,
 				B26DB8C22A214CD900B96F21 /* HTTPStatusCode.swift in Sources */,
 				B26DB8BB2A214C6200B96F21 /* HomeRouter.swift in Sources */,
 				B2C437B22A263D2B00F18E33 /* HTTPDogPresenter.swift in Sources */,
@@ -398,6 +413,7 @@
 				B2C437A82A26336700F18E33 /* HTTPDogNetworkRequest.swift in Sources */,
 				B26DB8BD2A214C6200B96F21 /* HomeViewController.swift in Sources */,
 				B26DB8832A2148EE00B96F21 /* SceneDelegate.swift in Sources */,
+				B29A3B522A281579004BE082 /* UIImageView+Extension.swift in Sources */,
 				B26DB8BA2A214C6200B96F21 /* HomeWorker.swift in Sources */,
 				B26DB8BE2A214C6200B96F21 /* HomeInteractor.swift in Sources */,
 				B26DB8B92A214C6200B96F21 /* HomePresenter.swift in Sources */,
